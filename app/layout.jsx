@@ -1,7 +1,7 @@
 import '@styles/globals.css'
 
 export const metadata = {
-    title: 'Prompt World',
+    title: 'PromptWorld',
     description: 'Find the best prompts for your AI',
 }
 
