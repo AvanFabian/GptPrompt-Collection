@@ -1,0 +1,4 @@
+nested route
+Dynamic Route : [ postId ]
+Layout.js in posts folder or (route) is to render reusable components
+anywhere in the app
