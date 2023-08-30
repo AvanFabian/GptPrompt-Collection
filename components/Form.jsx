@@ -24,6 +24,7 @@ handleSubmit }) => {
           </span>
 
           <textarea
+            // post is a prop with "Dictionary" containing prompt and tag
             value={post.prompt}
             onChange={(e)=> setPost({...post, // spread post object
             prompt: e.target.value})} // set prompt prop to value of textarea
@@ -43,8 +44,9 @@ handleSubmit }) => {
           </span>
 
           <input
+            // post is a prop with "Dictionary" containing prompt and tag
             value={post.tag}
-            onChange={(e)=> setPost({...post, // spread post object
+            onChange={(e)=> setPost({...post, // spread post state
             tag: e.target.value})} // set prompt prop to value of textarea
             placeholder='#tag'
             required
