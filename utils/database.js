@@ -15,7 +15,7 @@ export const connectToDB = async () => {
     try {
         // URI of mongodb atlas instance
         await mongoose.connect(process.env.MONGODB_URI, {
-            dbName: 'PromptWorld',
+            dbName: 'cluster0',
             // Options to fix all deprecation warnings
             useNewUrlParser: true, 
             // used for monitoring engine deprecation warnings
