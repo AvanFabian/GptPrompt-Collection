@@ -7,18 +7,18 @@ import { signIn, signOut, useSession,
 getProviders } from 'next-auth/react'
 
 const Nav = () => {
-  const isUserLoggedIn = true
+  const { data: session} = useSession()
 
   const [providers, setProviders] = useState(null)
   const [toggleDropdown, setToggleDropdown] = useState(false)
 
   useEffect(() => {
-    const setProviders = async () => {
+    const setupProviders = async () => {
       const response = await getProviders()      
       setProviders(response)
     }
 
-    setProviders()
+    setupProviders()
 
   }, [])
 
@@ -35,9 +35,11 @@ const Nav = () => {
         <p className='logo_text sm:mr-6'>PromptWorld</p>
       </Link>
 
+      {/* {alert(session?.user )} */}
+
       {/* Dekstop Navigation */}
       <div className='sm:flex hidden'>
-        { isUserLoggedIn ? (
+        { session?.user ? (
           <div className='flex gap-3 md:gap-5'>
 
             {/* Create Prompt Btn */}
@@ -51,12 +53,14 @@ const Nav = () => {
               Sign Out
             </button>
 
+          {/* {alert(session?.user.image)} */}
+
             {/* User Profile Pic. */}
             <Link href='/profile'>
               <Image 
-                src="/assets/images/logo.svg"
-                width={36}
-                height={36}
+                src={session?.user?.image}
+                width={44}
+                height={44}
                 className='rounded-full'
                 alt='Profile'
               />
@@ -82,10 +86,10 @@ const Nav = () => {
       </div>
       {/* Mobile Navigation */}
       <div className='sm:hidden flex relative'>
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className="flex">
             <Image 
-              src="/assets/images/logo.svg"
+              src={session?.user.picture}
               width={36}
               height={36}
               className='rounded-full'
