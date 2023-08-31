@@ -17,9 +17,9 @@ export const connectToDB = async () => {
         await mongoose.connect(process.env.MONGODB_URI, {
             dbName: 'cluster0',
             // Options to fix all deprecation warnings
-            useNewUrlParser: true, 
+            // useNewUrlParser: true, 
             // used for monitoring engine deprecation warnings
-            useUnifiedTopology: true,
+            // useUnifiedTopology: true,
         })
 
         isConnected = true

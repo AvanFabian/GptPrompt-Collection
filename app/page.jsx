@@ -1,6 +1,5 @@
 import Feed from '@components/Feed';
 
-
 const Home = () => {
   return (
     // Using class below, so elements will be full below another

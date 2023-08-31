@@ -14,7 +14,7 @@ const handler = NextAuth({
     // FInally we need to get user data every time to keep an 
     // existing and active session
     callbacks: {
-        async session({ session}) {
+        async session({ session }) {
             const sessionUser = await User.findOne({
                 email: session.user.email,
             })

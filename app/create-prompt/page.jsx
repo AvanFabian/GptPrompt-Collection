@@ -4,10 +4,12 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
 import Form from '@components/Form'
-import { set } from 'mongoose'
-import session from 'express-session'
 
 const CreatePrompt = () => {
+    const router = useRouter()
+    // we're getting the session data
+    const { data: session } = useSession() 
+
     const [submitting, setSubmitting] = useState(false)
     /* modifying the state object without creating a new object 
     can lead to unexpected behavior. React relies on immutability to 
@@ -16,7 +18,7 @@ const CreatePrompt = () => {
     property ensures that React can accurately detect the change and 
     update the component accordingly
     */
-    const[post, setPost] = useState({
+    const [post, setPost] = useState({
         prompt: '',
         tag: '',
     })
@@ -47,10 +49,13 @@ const CreatePrompt = () => {
             }
         } catch (error) {
             console.log(error)
+        } finally { // "finally" clause is always executed
+            setSubmitting(false) // we can end the loading by setting it to false
         }
     }
 
   return (
+    // we are passing props to Form component and render it
     <Form 
         type='Create'
         post={post} // post is a prop with "Dictionary" type

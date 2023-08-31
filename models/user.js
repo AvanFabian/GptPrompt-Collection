@@ -18,10 +18,11 @@ const UserSchema = new Schema({
     }
 })
 
-// This's regular express backend model instance :
-// const User = model('User', UserSchema)
-// But in nextjs, the functionalty only running when called,
-// so we need to check if the model already exists or not
+/* This's regular express backend model instance :
+    const User = model('User', UserSchema)
+    But a better approach is to check if the model already exists or 
+    not. If it does, use that model, otherwise, create a new one.
+*/ 
 const User = models.User || model('User', UserSchema)
 
 export default User
