@@ -13,8 +13,30 @@ module.exports = {
       },
       colors: {
         'primary-orange': '#FF5722',
+      },
+      keyframes: {
+        'bounce-slow': {
+          '0%' : {
+            transform: 'translateY(0)'
+          },
+          '25%' : {
+            transform: 'translateY(-20px)'
+          },
+          '50%' : {
+            transform: 'translateY(0)'
+          },
+          '75%' : {
+            transform: 'translateY(-20px)'
+          },
+          '100%' : {
+            transform: 'translateY(0)'
+          }
+        },
+      },
+      animation: {
+        'bounce-slow': 'bounce-slow 3s ease-in-out infinite',
       }
-    },
+    }
   },
   plugins: [],
 }

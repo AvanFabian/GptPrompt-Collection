@@ -1,7 +1,7 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 
 import Form from '@components/Form'
 
@@ -22,6 +22,10 @@ const CreatePrompt = () => {
         prompt: '',
         tag: '',
     })
+
+    // useEffect(() => {
+
+    // }, [])
 
     const createPrompt = async (e) => {
         e.preventDefault()
@@ -67,3 +71,10 @@ const CreatePrompt = () => {
 }
 
 export default CreatePrompt
+
+// export async function getServerSideProps() {
+//     await new Promise((resolve) => setTimeout(resolve, 1000))
+//     return {
+//         props: {},
+//     }
+// }

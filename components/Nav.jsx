@@ -5,12 +5,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { signIn, signOut, useSession,
 getProviders } from 'next-auth/react'
+import Loading from './Loading'
 
 const Nav = () => {
   const { data: session} = useSession()
 
   const [providers, setProviders] = useState(null)
   const [toggleDropdown, setToggleDropdown] = useState(false)
+  // const router = useRouter()
 
   useEffect(() => {
     const setupProviders = async () => {
@@ -23,7 +25,7 @@ const Nav = () => {
   }, [])
 
   return (
-    <nav className='flex-between w-full mb-16 pt-3'>
+    <nav className='flex-between w-full mb-8 pt-3'>
       <Link href="/" className='flex gap-3 md:mr-5 flex-center'>
         <Image 
           src="/assets/images/logo.svg"
@@ -35,38 +37,9 @@ const Nav = () => {
         <p className='logo_text sm:mr-6'>PromptWorld</p>
       </Link>
 
-      {/* {alert(session?.user )} */}
-
       {/* Dekstop Navigation */}
       <div className='sm:flex hidden'>
-        { session?.user ? (
-          <div className='flex gap-3 md:gap-5'>
-
-            {/* Create Prompt Btn */}
-            <Link href="/create-prompt" className='black_btn'>
-              Create Prompt
-            </Link>
-
-            {/* SignOut Btn */}
-            <button type='button' onClick={signOut}
-              className='outline_btn'>
-              Sign Out
-            </button>
-
-          {/* {alert(session?.user.image)} */}
-
-            {/* User Profile Pic. */}
-            <Link href='/profile'>
-              <Image 
-                src={session?.user?.image}
-                width={44}
-                height={44}
-                className='rounded-full'
-                alt='Profile'
-              />
-            </Link>
-          </div>
-        ): (
+        { !session?.user ? (
           <>
           {/* If we have access to providers, then we map over
           providers which come from providers fetch response*/}
@@ -82,6 +55,30 @@ const Nav = () => {
                 </button>
               ))}
           </>
+        ): (
+          <div className='flex gap-3 md:gap-5'>
+            {/* Create Prompt Btn */}
+            <Link href='/create-prompt' className='black_btn'>
+              Create Prompt
+            </Link>
+
+            {/* SignOut Btn */}
+            <button type='button' onClick={signOut}
+              className='outline_btn'>
+              Sign Out
+            </button>
+
+            {/* User Profile Pic. */}
+            <Link href='/profile'>
+              <Image 
+                src={session?.user?.image}
+                width={44}
+                height={44}
+                className='rounded-full'
+                alt='Profile'
+              />
+            </Link>
+          </div>
         )}
       </div>
       {/* Mobile Navigation */}
@@ -90,8 +87,8 @@ const Nav = () => {
           <div className="flex">
             <Image 
               src={session?.user.picture}
-              width={36}
-              height={36}
+              width={44}
+              height={44}
               className='rounded-full'
               alt='Profile'
               // Below will lead to an unxpected behaviour

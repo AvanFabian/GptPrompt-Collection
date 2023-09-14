@@ -6,7 +6,7 @@ handleSubmit }) => {
     <section className='w-full max-w-full flex-start
     flex-col'>
       <h1 className='head_text text_left'>
-        <span className=' blue_gradient'>{type} Post</span>
+        <span className='blue_gradient'>{type} Post</span>
       </h1>
       <p className='desc text-left max-w-md'>
         {type} and  Dive into a diverse range of AI-generated prompts that cater to various interests and objectives. From creative writing to problem-solving challenges, find the perfect prompt to spark your imagination.
@@ -19,7 +19,7 @@ handleSubmit }) => {
       >
         <label>
           <span className='font-satoshi font-semibold text-base
-          text-gray-700'>
+          blue_gradient'>
             Your AI Prompt
           </span>
 
@@ -37,9 +37,9 @@ handleSubmit }) => {
         </label>
         <label>
           <span className='font-satoshi font-semibold text-base
-          text-gray-700'>
-            Tag&nbsp;
-            <span className='font-normal'>
+          '>
+            <span className='blue_gradient'>Tag&nbsp;</span>
+            <span className='font-normal text-gray-300'>
             (#tech, #idea, #development)</span>
           </span>
 
@@ -55,7 +55,7 @@ handleSubmit }) => {
         </label>
 
         <div className='flex-end mx-3 mb-5 gap-4'>
-          <Link href='/' className='text-gray-500 text-sm'>
+          <Link href='/' className='text-gray-50 text-sm'>
             Cancel
           </Link>
 
@@ -64,9 +64,11 @@ handleSubmit }) => {
             // if we are submitting, we disable the button
             disabled={submitting}
             className='px-5 py-1.5 text-sm bg-primary-orange
-            rounded-full text-white'
+            rounded-full text-gray-50'
           >
-            {submitting ? `${type}...` : type}
+            {submitting 
+              ? `${type}...` 
+              : type}
           </button>
         </div>
       </form>
