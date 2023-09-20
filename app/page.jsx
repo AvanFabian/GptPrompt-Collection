@@ -7,31 +7,6 @@ import { TypeAnimation } from 'react-type-animation'
 import { useState, useEffect } from 'react'
 
 const RobotAnimation = () => {
-    // const [windowSize, setWindowSize] = useState({
-    //     winWidth: window.innerWidth,
-    //     winHeight: window.innerHeight,
-    // })
-
-    // const detectSize = () => {
-    //     setWindowSize({
-    //         winWidth: window.innerWidth,
-    //         winHeight: window.innerHeight,
-    //     })
-    // }
-
-    // useEffect(() => {
-    //     window.addEventListener('resize', detectSize)
-    //     return () => {
-    //         window.removeEventListener('resize', detectSize)
-    //     }
-    // }, [windowSize])
-
-    // // Large robot animation
-    // const style1 = {
-    //     width: 450,
-    //     height: 550,
-    // }
-    // // Small robot animation
     const style2 = {
         width: 650,
         height: 550,
@@ -43,14 +18,8 @@ const RobotAnimation = () => {
         // autoplay: true,
     }
 
-    // Check window size to determine which animation to use
-    // if (windowSize.winWidth < 868) {
-        // const { View } = useLottie(options, style1)
-        // return View
-    // } else {
     const { View } = useLottie(options, style2)
     return View
-    // }
 }
 
 const Home = () => {
@@ -70,9 +39,6 @@ const Home = () => {
                                 1000, // Waits 1s
                                 '', // Types ''
                                 500, // Waits 0.5s
-                                () => {
-                                    console.log('Sequence completed')
-                                },
                             ]}
                             wrapper="div"
                             cursor={true}
@@ -94,7 +60,6 @@ const Home = () => {
                     <RobotAnimation />
                 </div>
             </div>
-
 
             <Feed />
         </section>

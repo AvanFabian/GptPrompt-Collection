@@ -49,10 +49,17 @@ handleDelete }) => {
           <p className='font-sans text-[#f8ecde] text-xs subpixel-antialiased'>
             {post.prompt}
           </p>
-          <p className='font-sans text-[15px] subpixel-
-          antialiased disabled:opacity-75 mt-3 text-[#ebebeb]'>
-            {post.tag}
-          </p>
+        <div className=''>
+          {post.tags.map((tag) => (
+            <span
+              key={tag} // Make sure to use a unique key for each tag
+              className='font-sans mr-[5px] text-[15px] subpixel-antialiased disabled:opacity-75 mt-3 text-[#ebebeb] hover:cursor-pointer'
+              onClick={(e) => handleTagClick(e, tag)}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
         </div>
       </div>
     </div>

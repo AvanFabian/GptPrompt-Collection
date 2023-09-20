@@ -12,7 +12,6 @@ const Nav = () => {
 
   const [providers, setProviders] = useState(null)
   const [toggleDropdown, setToggleDropdown] = useState(false)
-  // const router = useRouter()
 
   useEffect(() => {
     const setupProviders = async () => {
@@ -27,13 +26,13 @@ const Nav = () => {
   return (
     <nav className='flex-between w-full mb-8 pt-3'>
       <Link href="/" className='flex gap-3 md:mr-5 flex-center'>
-        <Image 
+        {/* <Image 
           src="/assets/images/logo.svg"
           alt='PromptWorld Logo'
           width={30}
           height={30}
           className='object-contain'
-        />
+        /> */}
         <p className='logo_text sm:mr-6'>PromptWorld</p>
       </Link>
 

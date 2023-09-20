@@ -23,10 +23,6 @@ const CreatePrompt = () => {
         tag: '',
     })
 
-    // useEffect(() => {
-
-    // }, [])
-
     const createPrompt = async (e) => {
         e.preventDefault()
         setSubmitting(true) // later we can use this as a loader
@@ -39,7 +35,7 @@ const CreatePrompt = () => {
                     {
                         prompt: post.prompt,
                         userId: session?.user.id,
-                        tag: post.tag,
+                        tags: post.tag,
                     }
                 ),
             })
@@ -71,10 +67,3 @@ const CreatePrompt = () => {
 }
 
 export default CreatePrompt
-
-// export async function getServerSideProps() {
-//     await new Promise((resolve) => setTimeout(resolve, 1000))
-//     return {
-//         props: {},
-//     }
-// }
