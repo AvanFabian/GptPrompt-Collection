@@ -14,7 +14,7 @@ export const connectToDB = async () => {
     // If not connected, create a new connection
     try {
         // URI of mongodb atlas instance
-        await mongoose.connect(process.env.MONGODB_URI, {
+        await mongoose.connect(process.env.NEXT_PUBLIC_MONGODB_URI, {
             dbName: 'cluster0',
             // Options to fix all deprecation warnings
             // useNewUrlParser: true, 
