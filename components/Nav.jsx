@@ -17,6 +17,7 @@ const Nav = () => {
     const setupProviders = async () => {
       const response = await getProviders()      
       setProviders(response)
+      console.log(response)
     }
 
     setupProviders()
@@ -38,7 +39,31 @@ const Nav = () => {
 
       {/* Dekstop Navigation */}
       <div className='sm:flex hidden'>
-        { !session?.user ? (
+        {session?.user ? (
+          <div className='flex gap-3 md:gap-5'>
+          {/* Create Prompt Btn */}
+          <Link href='/create-prompt' className='black_btn'>
+            Create Prompt
+          </Link>
+
+          {/* SignOut Btn */}
+          <button type='button' onClick={signOut}
+            className='outline_btn'>
+            Sign Out
+          </button>
+
+          {/* User Profile Pic. */}
+          <Link href='/profile'>
+            <Image 
+              src={session?.user?.image}
+              width={44}
+              height={44}
+              className='rounded-full'
+              alt='Profile'
+            />
+          </Link>
+        </div>
+        ): (
           <>
           {/* If we have access to providers, then we map over
           providers which come from providers fetch response*/}
@@ -50,34 +75,10 @@ const Nav = () => {
                   onClick={() => signIn(provider.id)}
                   className='black_btn'
                 >
-                  Sign in
+                  Sign in With {provider.name}
                 </button>
               ))}
           </>
-        ): (
-          <div className='flex gap-3 md:gap-5'>
-            {/* Create Prompt Btn */}
-            <Link href='/create-prompt' className='black_btn'>
-              Create Prompt
-            </Link>
-
-            {/* SignOut Btn */}
-            <button type='button' onClick={signOut}
-              className='outline_btn'>
-              Sign Out
-            </button>
-
-            {/* User Profile Pic. */}
-            <Link href='/profile'>
-              <Image 
-                src={session?.user?.image}
-                width={44}
-                height={44}
-                className='rounded-full'
-                alt='Profile'
-              />
-            </Link>
-          </div>
         )}
       </div>
       {/* Mobile Navigation */}

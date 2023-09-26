@@ -1,10 +1,11 @@
 'use client'
-import Feed from '@components/Feed'
+import { useState, useEffect } from 'react'
+import dynamic from 'next/dynamic'
 import { useLottie } from "lottie-react"
 import robot_animated from '@assets/animations/robot_animated3.json'
 
 import { TypeAnimation } from 'react-type-animation'
-import { useState, useEffect } from 'react'
+const Feed = dynamic(() => import('@components/Feed'))
 
 const RobotAnimation = () => {
     const style2 = {

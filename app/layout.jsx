@@ -1,10 +1,12 @@
 import '@styles/globals.css'
 
+import dynamic from 'next/dynamic'
 import { usePathname } from 'next/navigation'
-import Nav from '@components/Nav'
-import Provider from '@components/Provider'
 // import { NavigationEvents } from './components/navigation-events'
-import Template from './template'
+
+const Nav = dynamic(() => import('@components/Nav'))
+const Provider = dynamic(() => import('@components/Provider'))
+const Template = dynamic(() => import('./template'))
 
 export const metadata = {
     title: 'PromptWorld',

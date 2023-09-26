@@ -1,9 +1,10 @@
 'use client'
 
 import { useState, useEffect} from 'react'
-
-import PromptCard from './PromptCard'
+import dynamic from 'next/dynamic'
 import { useSession } from 'next-auth/react'
+
+const PromptCard = dynamic(() => import('@components/PromptCard'))
 
 const PromptCardList = ({ data, handleTagClick, 
   filteredTagPosts, filteredSearchInputPosts }) => {
