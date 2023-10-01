@@ -3,11 +3,13 @@
 import { useState, useEffect} from 'react'
 import dynamic from 'next/dynamic'
 import { useSession } from 'next-auth/react'
-
+// router
+import { useRouter } from 'next/navigation'
 const PromptCard = dynamic(() => import('@components/PromptCard'))
 
 const PromptCardList = ({ data, handleTagClick, 
-  filteredTagPosts, filteredSearchInputPosts }) => {
+  filteredTagPosts, filteredSearchInputPosts, session,
+  handleEdit, handleDelete }) => {
 
   return (
     // Show the data and create a cards
@@ -18,6 +20,7 @@ const PromptCardList = ({ data, handleTagClick,
           <PromptCard 
             key={post._id}
             post={post}
+            session={session}
             handleTagClick={handleTagClick}
           />
         ))
@@ -27,6 +30,7 @@ const PromptCardList = ({ data, handleTagClick,
             <PromptCard
               key={post._id}
               post={post}
+              session={session}
               handleTagClick={handleTagClick}
             />
           ))
@@ -36,7 +40,8 @@ const PromptCardList = ({ data, handleTagClick,
             <PromptCard 
               key={post._id}
               post={post}
-              handleTagClick={handleTagClick}
+              session={session}
+              handleTagClick={handleTagClick}              
             />
           ))
         )
@@ -45,12 +50,13 @@ const PromptCardList = ({ data, handleTagClick,
   )
 }
 
+// Main feed component
 const Feed = () => {
   const { data: session} = useSession()
   const [selectedTag, setSelectedTag] = useState(null);
   const [searchText, setSearchText] = useState('')
   const [posts, setPosts] = useState([])
-
+  const router = useRouter()
 
   // Filter Posts Based on Selected Tag:
   const filteredTagPosts = selectedTag
@@ -59,6 +65,7 @@ const Feed = () => {
 
   // Filter Posts Based on Search input Text:
   const filterPosts = (posts, searchText) => {
+    console.log(posts)
     return posts.filter((post) => {
       // Check if the post's tags include the search text
       const tagMatch = post.tags.some((tag) =>
@@ -66,6 +73,8 @@ const Feed = () => {
       );
       // Check if the post's username includes the search text
       const usernameMatch = post.username?.toLowerCase().includes(searchText.toLowerCase());
+      console.log(tagMatch)
+      console.log(usernameMatch)
       return tagMatch || usernameMatch;
     });
   };  
@@ -84,6 +93,7 @@ const Feed = () => {
     if (e.key === 'Enter') {
       e.preventDefault()
       setSelectedTag(searchText)
+      
       setSearchText('')
     }
   }
@@ -114,12 +124,12 @@ const Feed = () => {
           className='search_input peer'
         />
       </form>
-
       {session?.user ? (
         <PromptCardList 
           data={posts}
           filteredTagPosts={filteredTagPosts}
           filteredSearchInputPosts={filteredSearchInputPosts}
+          session={session}
           handleTagClick={
             (e, tag) => {
               e.preventDefault()

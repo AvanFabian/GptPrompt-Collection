@@ -43,7 +43,7 @@
 .gradient {
   height: fit-content;
   z-index: 3;
-  background-image: url("/assets/images/outerspace-nebula2.png");
+  background-image: url("/assets/images/outerspace-nebula2.webp");
   background-repeat: no-repeat;
   background-size: cover;  
   position: absolute;

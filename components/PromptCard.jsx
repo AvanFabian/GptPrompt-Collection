@@ -2,19 +2,18 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { useSession } from 'next-auth/react'
 import { usePathname, useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 const PromptCard = ({ post, handleTagClick, handleEdit,
-handleDelete }) => {
+  handleDelete, session }) => {
   const [copied, setCopied] = useState(false)
-
   return (
     <div className='prompt_card flex-1'>
       <div className='flex justify-between items-start '>
         <div className=' flex flex-3 justify-start items-center
         gap-3 cursor-pointer'> {/* cursor pointer to indicate its clickable */}
-          <Image 
+          <Image
             src={post.creator.image}
             alt='user_image'
             width={40}
@@ -32,13 +31,13 @@ handleDelete }) => {
             </p>
           </div>
         </div>
-        
-        <div className='copy_btn absolute top-[5px] right-[5px]' onClick={() => {}}>
-          <Image 
+
+        <div className='copy_btn absolute top-[5px] right-[5px]' onClick={() => { }}>
+          <Image
             src={copied === post.prompt
-            ? '/assets/icons/tick.svg'
-            : '/assets/icons/copy.svg'
-            } 
+              ? '/assets/icons/tick.svg'
+              : '/assets/icons/copy.svg'
+            }
             width={21}
             height={21}
           />
@@ -49,17 +48,41 @@ handleDelete }) => {
           <p className='font-sans text-[#f8ecde] text-xs subpixel-antialiased'>
             {post.prompt}
           </p>
-        <div className=''>
-          {post.tags.map((tag) => (
-            <span
-              key={tag} // Make sure to use a unique key for each tag
-              className='font-sans mr-[5px] text-[15px] subpixel-antialiased disabled:opacity-75 mt-3 text-[#ebebeb] hover:cursor-pointer'
-              onClick={(e) => handleTagClick(e, tag)}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
+          <div className='mt-2'>
+            {post.tags.map((tag) => (
+              <span
+                key={tag} // Make sure to use a unique key for each tag
+                className='font-sans mr-[5px] text-[15px] subpixel-antialiased disabled:opacity-75 mt-3 text-[#ebebeb] hover:cursor-pointer'
+                onClick={(e) => handleTagClick(e, tag)}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          <div className='flex flex-row gap-7 mt-5 flex-center'>
+            {/* If prompt creator display edit and delete  */}
+            {session?.user?.email === post.creator.email && (
+              <>
+                <Link
+                  className='font-sans mr-[5px] text-[15px] subpixel-antialiased 
+                  disabled:opacity-75 text-[#51e2fc] hover:cursor-pointer'
+                  // onClick={(e) => handleEdit(e, post._id)}
+                  href={`/update-prompt?id=${post._id}`}
+                >
+                  Edit
+                </Link>
+                <Link
+                  className='font-sans mr-[5px] text-[15px] subpixel-antialiased 
+                  disabled:opacity-75 text-[#eb4949] hover:cursor-pointer'
+                  // onClick={(e) => handleDelete(e, post._id)}
+                  href={`/delete-prompt?id=${post._id}`}
+                >
+                  Delete
+                </Link>
+              </>
+            )}
+
+          </div>
         </div>
       </div>
     </div>
